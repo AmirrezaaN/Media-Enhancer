@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Sign up" %}{% endblock %}
+{% block content %}
+<div class="auth-card card">
+  <h1>{% trans "Create an account" %}</h1>
+  {% if site.signup_bonus %}
+    <p class="gift">🎁 {% blocktrans with n=site.signup_bonus %}You get {{ n }} free coins after signing up.{% endblocktrans %}</p>
+  {% endif %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
+    {% for field in form %}{% include "accounts/_field.html" %}{% endfor %}
+    <button class="btn btn-lg btn-block" type="submit">{% trans "Sign up" %}</button>
+  </form>
+  <p class="center muted">{% trans "Already have an account?" %} <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a></p>
+</div>
+{% endblock %}

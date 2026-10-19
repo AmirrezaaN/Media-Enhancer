@@ -1,0 +1,54 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Wallet" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Account and coins" %}</h1>
+  <a class="btn btn-ghost" href="{% url 'accounts:password_change' %}">{% trans "Change password" %}</a>
+</div>
+
+<div class="grid grid-2">
+  <div class="card balance-card">
+    <span class="muted">{% trans "Your balance" %}</span>
+    <div class="balance"><span class="coin-icon">●</span> {{ user.coins }} <small>{% trans "coins" %}</small></div>
+    <p class="muted small">{% trans "To get more coins, contact the site administrator." %}</p>
+    <dl class="compact">
+      <dt>{% trans "Username" %}</dt><dd>{{ user.username }}</dd>
+      <dt>{% trans "Email" %}</dt><dd class="ltr">{{ user.email }}</dd>
+    </dl>
+  </div>
+  <div class="card">
+    <h3>🎁 {% trans "Invite friends" %}</h3>
+    <p>{% blocktrans with a=site.referral_bonus_referrer b=site.referral_bonus_new_user %}Share your link. When a friend signs up with it, you get {{ a }} coins and they get {{ b }} extra coins.{% endblocktrans %}</p>
+    <div class="copy-row">
+      <input type="text" readonly value="{{ referral_link }}" class="ltr" data-copy-source>
+      <button class="btn" type="button" data-copy data-copied-text="{% trans 'Copied!' %}">{% trans "Copy" %}</button>
+    </div>
+    <p class="muted small">{% trans "Your code" %}: <b class="ltr">{{ user.referral_code }}</b> · {% blocktrans count n=referral_count %}{{ n }} friend joined{% plural %}{{ n }} friends joined{% endblocktrans %}</p>
+  </div>
+</div>
+
+<h2 class="section-title-sm">{% trans "Coin history" %}</h2>
+<div class="card table-wrap">
+  {% if page.object_list %}
+  <table class="table">
+    <thead><tr><th>{% trans "Date" %}</th><th>{% trans "Description" %}</th><th class="num">{% trans "Amount" %}</th><th class="num">{% trans "Balance" %}</th></tr></thead>
+    <tbody>
+    {% for tx in page.object_list %}
+      <tr>
+        <td class="nowrap">{{ tx.created_at|date:"Y-m-d H:i" }}</td>
+        <td>
+          {{ tx.get_kind_display }}
+          {% if tx.job_id %}<a class="muted small" href="{% url 'enhancer:job_detail' tx.job_id %}">{{ tx.note }}</a>{% elif tx.note and tx.kind == "admin_grant" or tx.note and tx.kind == "admin_deduct" %}<span class="muted small">— {{ tx.note }}</span>{% endif %}
+        </td>
+        <td class="num {% if tx.amount > 0 %}pos{% else %}neg{% endif %}">{% if tx.amount > 0 %}+{% endif %}{{ tx.amount }}</td>
+        <td class="num">{{ tx.balance_after }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% include "_pagination.html" %}
+  {% else %}
+    <p class="muted center">{% trans "No transactions yet." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

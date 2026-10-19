@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Not found" %}{% endblock %}
+{% block content %}
+<div class="card empty">
+  <h1>404</h1>
+  <p>{% trans "This page does not exist." %}</p>
+  <a class="btn" href="{% url 'enhancer:home' %}">{% trans "Home" %}</a>
+</div>
+{% endblock %}

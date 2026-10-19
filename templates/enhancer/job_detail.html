@@ -1,0 +1,93 @@
+{% extends "base.html" %}{% load i18n l10n enhancer_tags %}
+{% block title %}{{ job.original_name }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <a class="small" href="{% url 'enhancer:job_list' %}">← {% trans "My files" %}</a>
+    <h1 class="ellipsis">{{ job.original_name }}</h1>
+  </div>
+  <span class="badge badge-lg badge-{{ job.status }}" data-status-badge>{{ job.get_status_display }}</span>
+</div>
+
+<div class="detail-grid">
+  <section class="card">
+    {% if job.status == "done" and not job.files_deleted %}
+      <div class="compare" data-compare>
+        <img class="compare-img" src="{% url 'enhancer:job_file' job.pk 'before' %}" alt="{% trans 'Before' %}">
+        <div class="compare-after" data-compare-after>
+          <img class="compare-img" src="{% url 'enhancer:job_file' job.pk 'after' %}" alt="{% trans 'After' %}">
+        </div>
+        <div class="compare-handle" data-compare-handle><span>⟷</span></div>
+        <span class="compare-label compare-label-before">{% trans "Before" %}</span>
+        <span class="compare-label compare-label-after">{% trans "After" %}</span>
+        <input type="range" min="0" max="100" value="50" class="compare-range" data-compare-range aria-label="{% trans 'Compare before and after' %}">
+      </div>
+      {% if not job.is_image %}
+        <p class="muted small center">{% trans "The comparison shows one frame from the middle of the video." %}</p>
+        <video class="result-video" controls preload="metadata" src="{% url 'enhancer:job_file' job.pk 'output' %}"></video>
+      {% endif %}
+      <div class="result-actions">
+        <a class="btn btn-lg" href="{% url 'enhancer:job_file' job.pk 'output' %}?download=1">⬇ {% trans "Download result" %}</a>
+        <a class="btn btn-ghost" href="{% url 'enhancer:job_file' job.pk 'after' %}" target="_blank" rel="noopener">{% trans "Open preview" %}</a>
+      </div>
+    {% elif job.status == "done" and job.files_deleted %}
+      <div class="empty">{% trans "The files of this job were deleted after the storage period." %}</div>
+    {% elif job.is_active %}
+      <div class="progress-box" data-job-status-url="{% url 'enhancer:job_status' job.pk %}">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 data-stage>{{ status.stage|default:status.status_display }}</h2>
+        <div class="bar bar-lg"><span data-progress-bar data-width="{{ status.progress|unlocalize }}"></span></div>
+        <div class="progress-meta">
+          <b data-progress-text>{{ status.progress }}%</b>
+          <span class="muted" data-queue{% if not status.queue_position %} hidden{% endif %}>{% trans "Position in queue" %}: <b data-queue-pos>{{ status.queue_position }}</b></span>
+          <span class="muted" data-eta hidden>{% trans "Time left" %}: <b data-eta-value></b></span>
+        </div>
+        {% if not worker_online %}
+          <div class="alert alert-warning">{% trans "The processing server is offline right now. Your job will start as soon as it is back." %}</div>
+        {% endif %}
+        <p class="muted small">{% trans "You can close this page; the job keeps running and you will find it in My files." %}</p>
+        <form method="post" action="{% url 'enhancer:job_cancel' job.pk %}" data-confirm="{% trans 'Cancel this job? Your coins will be returned.' %}">
+          {% csrf_token %}<button class="btn btn-ghost btn-danger" type="submit">{% trans "Cancel job" %}</button>
+        </form>
+      </div>
+    {% elif job.status == "failed" %}
+      <div class="empty">
+        <h2>{% trans "Processing failed" %}</h2>
+        <p>{% trans "Something went wrong while processing this file. Your coins were returned." %}</p>
+        {% if user.is_staff %}<pre class="error-box">{{ job.error_message }}</pre>{% endif %}
+        <a class="btn" href="{% url 'enhancer:dashboard' %}">{% trans "Try again" %}</a>
+      </div>
+    {% else %}
+      <div class="empty">
+        <h2>{% trans "Cancelled" %}</h2>
+        <p>{% trans "This job was cancelled and the coins were returned." %}</p>
+      </div>
+    {% endif %}
+  </section>
+
+  <aside class="card details">
+    <h3>{% trans "Details" %}</h3>
+    <dl>
+      <dt>{% trans "Type" %}</dt><dd>{{ job.get_media_type_display }}</dd>
+      <dt>{% trans "Mode" %}</dt><dd>{{ job.get_quality_display }}</dd>
+      <dt>{% trans "Upscale" %}</dt><dd>{{ job.scale }}x</dd>
+      <dt>{% trans "Restore faces" %}</dt><dd>{% if job.face_enhance %}✓{% else %}—{% endif %}</dd>
+      {% if not job.is_image %}
+        <dt>{% trans "Smooth motion" %}</dt><dd>{% if job.fps_boost %}✓{% else %}—{% endif %}</dd>
+        <dt>{% trans "Length" %}</dt><dd>{{ job.duration|duration }}</dd>
+        <dt>{% trans "Frame rate" %}</dt><dd class="ltr">{{ job.fps|floatformat:2 }}{% if job.fps_boost %} → {% widthratio job.fps 1 2 %}{% endif %} FPS</dd>
+      {% endif %}
+      <dt>{% trans "Original size" %}</dt><dd class="ltr">{{ job.input_width }} × {{ job.input_height }}</dd>
+      {% if job.output_width %}<dt>{% trans "New size" %}</dt><dd class="ltr">{{ job.output_width }} × {{ job.output_height }}</dd>{% endif %}
+      <dt>{% trans "Cost" %}</dt><dd>{{ job.cost }} {% trans "coins" %}{% if job.refunded %} ({% trans "refunded" %}){% endif %}</dd>
+      <dt>{% trans "Uploaded" %}</dt><dd>{{ job.created_at|date:"Y-m-d H:i" }}</dd>
+      {% if job.processing_seconds is not None %}<dt>{% trans "Processing time" %}</dt><dd>{{ job.processing_seconds|duration }}</dd>{% endif %}
+    </dl>
+    {% if not job.is_active %}
+      <form method="post" action="{% url 'enhancer:job_delete' job.pk %}" data-confirm="{% trans 'Delete this job and its files permanently?' %}">
+        {% csrf_token %}<button class="btn btn-ghost btn-danger btn-block" type="submit">{% trans "Delete" %}</button>
+      </form>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

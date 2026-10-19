@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "My files" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "My files" %}</h1>
+  <a class="btn" href="{% url 'enhancer:dashboard' %}">+ {% trans "New" %}</a>
+</div>
+{% if page.object_list %}
+  <div class="grid grid-3">
+    {% for job in page.object_list %}{% include "enhancer/_job_card.html" %}{% endfor %}
+  </div>
+  {% include "_pagination.html" %}
+  {% if site_settings.retention_days %}
+    <p class="muted small center">{% blocktrans with d=site_settings.retention_days %}Files are kept for {{ d }} days, then deleted automatically.{% endblocktrans %}</p>
+  {% endif %}
+{% else %}
+  <div class="card empty">
+    <p>{% trans "You have not enhanced anything yet." %}</p>
+    <a class="btn" href="{% url 'enhancer:dashboard' %}">{% trans "Start enhancing" %}</a>
+  </div>
+{% endif %}
+{% endblock %}

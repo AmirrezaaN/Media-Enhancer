@@ -1,0 +1,978 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: media-enhancer\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Not found"
+msgstr "پیدا نشد"
+
+msgid "This page does not exist."
+msgstr "این صفحه وجود ندارد."
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "AI photo & video enhancer"
+msgstr "افزایش کیفیت عکس و ویدیو با هوش مصنوعی"
+
+msgid "Media Enhancer"
+msgstr "بهساز رسانه"
+
+msgid "Menu"
+msgstr "منو"
+
+msgid "Enhance"
+msgstr "افزایش کیفیت"
+
+msgid "My files"
+msgstr "فایل‌های من"
+
+msgid "Your coins"
+msgstr "سکه‌های شما"
+
+msgid "coins"
+msgstr "سکه"
+
+msgid "Admin panel"
+msgstr "پنل مدیریت"
+
+msgid "Log out"
+msgstr "خروج"
+
+msgid "Log in"
+msgstr "ورود"
+
+msgid "Sign up"
+msgstr "ثبت‌نام"
+
+msgid "Powered by Real-ESRGAN, GFPGAN and RIFE"
+msgstr "با قدرت Real-ESRGAN، GFPGAN و RIFE"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Next"
+msgstr "بعدی"
+
+#, python-format
+msgid "Page %(n)s of %(total)s"
+msgstr "صفحه %(n)s از %(total)s"
+
+msgid "No account yet?"
+msgstr "هنوز حساب ندارید؟"
+
+msgid "Change password"
+msgstr "تغییر رمز عبور"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Create an account"
+msgstr "ساخت حساب کاربری"
+
+msgid "Already have an account?"
+msgstr "حساب دارید؟"
+
+#, python-format
+msgid "You get %(n)s free coins after signing up."
+msgstr "بعد از ثبت‌نام %(n)s سکه رایگان می‌گیرید."
+
+msgid "Registration is closed"
+msgstr "ثبت‌نام بسته است"
+
+msgid "New accounts cannot be created right now. Please try again later."
+msgstr "در حال حاضر امکان ساخت حساب جدید وجود ندارد. لطفاً بعداً تلاش کنید."
+
+msgid "Wallet"
+msgstr "کیف سکه"
+
+msgid "Account and coins"
+msgstr "حساب و سکه‌ها"
+
+msgid "Your balance"
+msgstr "موجودی شما"
+
+msgid "To get more coins, contact the site administrator."
+msgstr "برای دریافت سکه بیشتر با مدیر سایت تماس بگیرید."
+
+msgid "Username"
+msgstr "نام کاربری"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Invite friends"
+msgstr "دعوت از دوستان"
+
+msgid "Copied!"
+msgstr "کپی شد!"
+
+msgid "Copy"
+msgstr "کپی"
+
+msgid "Your code"
+msgstr "کد شما"
+
+msgid "Coin history"
+msgstr "تاریخچه سکه‌ها"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Description"
+msgstr "شرح"
+
+msgid "Amount"
+msgstr "مقدار"
+
+msgid "Balance"
+msgstr "موجودی"
+
+msgid "No transactions yet."
+msgstr "هنوز تراکنشی ندارید."
+
+#, python-format
+msgid ""
+"Share your link. When a friend signs up with it, you get %(a)s coins and "
+"they get %(b)s extra coins."
+msgstr ""
+"لینک خود را به اشتراک بگذارید. وقتی دوستتان با آن ثبت‌نام کند، شما %(a)s سکه"
+" و او %(b)s سکه اضافه می‌گیرد."
+
+#, python-format
+msgid "%(n)s friend joined"
+msgid_plural "%(n)s friends joined"
+msgstr[0] "%(n)s دوست عضو شده"
+msgstr[1] "%(n)s دوست عضو شده‌اند"
+
+msgid "Prices, bonuses and limits"
+msgstr "قیمت‌ها، هدیه‌ها و محدودیت‌ها"
+
+msgid "Add / remove coins for all users"
+msgstr "افزودن / کم کردن سکه برای همه کاربران"
+
+msgid "Users"
+msgstr "کاربران"
+
+msgid "Jobs"
+msgstr "پردازش‌ها"
+
+msgid "View site"
+msgstr "مشاهده سایت"
+
+msgid "Processing worker"
+msgstr "سرور پردازش"
+
+msgid "Online"
+msgstr "روشن"
+
+msgid "Offline"
+msgstr "خاموش"
+
+msgid "in the last 24 hours"
+msgstr "در ۲۴ ساعت گذشته"
+
+msgid "Jobs in queue / processing"
+msgstr "در صف / در حال پردازش"
+
+msgid "Jobs (last 24 hours)"
+msgstr "پردازش‌ها (۲۴ ساعت گذشته)"
+
+msgid "total"
+msgstr "کل"
+
+msgid "Finished / failed"
+msgstr "موفق / ناموفق"
+
+msgid "Coins in user wallets"
+msgstr "سکه در کیف کاربران"
+
+msgid "Coins spent on jobs"
+msgstr "سکه خرج‌شده برای پردازش"
+
+msgid "Selected users"
+msgstr "کاربران انتخاب‌شده"
+
+msgid "Apply"
+msgstr "اعمال"
+
+#, python-format
+msgid "This changes the balance of all %(n)s active users."
+msgstr "این کار موجودی همه %(n)s کاربر فعال را تغییر می‌دهد."
+
+msgid "Enhance a photo or video"
+msgstr "افزایش کیفیت عکس یا ویدیو"
+
+msgid ""
+"The processing server is offline right now. You can still upload; your job "
+"will start as soon as it is back."
+msgstr ""
+"سرور پردازش الان خاموش است. می‌توانید فایل را بفرستید؛ به محض روشن شدن، "
+"پردازش شروع می‌شود."
+
+msgid "New jobs are paused right now. Please try again later."
+msgstr "ثبت پردازش جدید فعلاً متوقف است. لطفاً بعداً تلاش کنید."
+
+msgid "Drop a file here or click to choose"
+msgstr "فایل را اینجا رها کنید یا برای انتخاب کلیک کنید"
+
+msgid "Choose another file"
+msgstr "انتخاب فایل دیگر"
+
+msgid "Mode"
+msgstr "حالت"
+
+msgid "Fast"
+msgstr "سریع"
+
+msgid "Quick result, good for most videos"
+msgstr "نتیجه سریع، مناسب بیشتر ویدیوها"
+
+msgid "High quality"
+msgstr "کیفیت بالا"
+
+msgid "Slower, the best detail"
+msgstr "کندتر، با بیشترین جزئیات"
+
+msgid "Upscale"
+msgstr "بزرگ‌نمایی"
+
+msgid "Double the resolution"
+msgstr "دو برابر شدن وضوح"
+
+msgid "Maximum resolution"
+msgstr "بیشترین وضوح"
+
+msgid "Extras"
+msgstr "امکانات بیشتر"
+
+msgid "Restore faces"
+msgstr "بازسازی چهره"
+
+msgid "Sharper eyes, skin and hair"
+msgstr "چشم، پوست و موی واضح‌تر"
+
+msgid "Smooth motion"
+msgstr "حرکت روان"
+
+msgid "Double the frame rate (video only)"
+msgstr "دو برابر شدن فریم‌ریت (فقط ویدیو)"
+
+msgid "Cost"
+msgstr "هزینه"
+
+msgid "Enhance now"
+msgstr "شروع افزایش کیفیت"
+
+msgid "Uploading..."
+msgstr "در حال آپلود..."
+
+msgid "Recent files"
+msgstr "فایل‌های اخیر"
+
+msgid "See all"
+msgstr "مشاهده همه"
+
+#, python-format
+msgid "Balance: <b>%(n)s</b> coins"
+msgstr "موجودی: <b>%(n)s</b> سکه"
+
+#, python-format
+msgid ""
+"Images: JPG, PNG, WEBP up to %(img)s MB · Videos: MP4, MOV, MKV, WEBM up to "
+"%(vid)s MB and %(sec)s seconds"
+msgstr ""
+"عکس: JPG، PNG، WEBP تا %(img)s مگابایت · ویدیو: MP4، MOV، MKV، WEBM تا "
+"%(vid)s مگابایت و %(sec)s ثانیه"
+
+msgid "AI powered · Photos & videos"
+msgstr "با هوش مصنوعی · عکس و ویدیو"
+
+msgid "Make blurry photos and low-quality videos sharp again"
+msgstr "عکس‌های تار و ویدیوهای بی‌کیفیت را دوباره واضح کنید"
+
+msgid ""
+"Upload an image or a video. Our AI models upscale it up to 4x, remove noise "
+"and blur, restore faces and can even make videos smoother."
+msgstr ""
+"یک عکس یا ویدیو آپلود کنید. مدل‌های هوش مصنوعی ما وضوح آن را تا ۴ برابر بالا"
+" می‌برند، نویز و تاری را از بین می‌برند، چهره‌ها را بازسازی می‌کنند و حتی "
+"ویدیو را روان‌تر می‌کنند."
+
+msgid "Start enhancing"
+msgstr "شروع کنید"
+
+msgid "Sign up free"
+msgstr "ثبت‌نام رایگان"
+
+msgid "Before"
+msgstr "قبل"
+
+msgid "After"
+msgstr "بعد"
+
+msgid "What it does"
+msgstr "چه کاری انجام می‌دهد"
+
+msgid "Upscale up to 4x"
+msgstr "بزرگ‌نمایی تا ۴ برابر"
+
+msgid ""
+"Real-ESRGAN rebuilds fine detail so small pictures can be printed or shown "
+"on large screens."
+msgstr ""
+"Real-ESRGAN جزئیات ریز را بازسازی می‌کند تا عکس‌های کوچک قابل چاپ یا نمایش "
+"روی صفحه‌های بزرگ باشند."
+
+msgid "Face restoration"
+msgstr "بازسازی چهره"
+
+msgid "GFPGAN recovers eyes, skin and hair in blurry or old photos."
+msgstr "GFPGAN چشم، پوست و موی عکس‌های تار یا قدیمی را بازسازی می‌کند."
+
+msgid "Video enhancement"
+msgstr "افزایش کیفیت ویدیو"
+
+msgid "Every frame is enhanced and the sound is kept. Get up to 4K output."
+msgstr "تک‌تک فریم‌ها بهتر می‌شوند و صدا حفظ می‌شود. خروجی تا کیفیت 4K."
+
+msgid ""
+"RIFE creates new in-between frames to double the frame rate, for example 30 "
+"to 60 FPS."
+msgstr ""
+"RIFE فریم‌های میانی جدید می‌سازد تا فریم‌ریت دو برابر شود، مثلاً از ۳۰ به ۶۰"
+" فریم."
+
+msgid "How it works"
+msgstr "چطور کار می‌کند"
+
+msgid "Upload"
+msgstr "آپلود"
+
+msgid "Choose a photo or a video."
+msgstr "یک عکس یا ویدیو انتخاب کنید."
+
+msgid "Choose"
+msgstr "انتخاب"
+
+msgid "Fast or high quality, 2x or 4x, faces and smooth motion."
+msgstr "سریع یا باکیفیت، ۲ یا ۴ برابر، بازسازی چهره و حرکت روان."
+
+msgid "Download"
+msgstr "دانلود"
+
+msgid "Compare before and after, then download the result."
+msgstr "قبل و بعد را مقایسه کنید و نتیجه را دانلود کنید."
+
+msgid "Prices"
+msgstr "قیمت‌ها"
+
+msgid "Images"
+msgstr "عکس‌ها"
+
+msgid "coins per image"
+msgstr "سکه برای هر عکس"
+
+msgid "Fast mode"
+msgstr "حالت سریع"
+
+msgid "High quality mode"
+msgstr "حالت کیفیت بالا"
+
+msgid "4x instead of 2x"
+msgstr "۴ برابر به جای ۲ برابر"
+
+msgid "Videos"
+msgstr "ویدیوها"
+
+msgid "coins per 10 seconds"
+msgstr "سکه برای هر ۱۰ ثانیه"
+
+msgid "Smooth motion (2x FPS)"
+msgstr "حرکت روان (۲ برابر فریم)"
+
+#, python-format
+msgid "New accounts get %(n)s free coins."
+msgstr "حساب‌های جدید %(n)s سکه رایگان می‌گیرند."
+
+#, python-format
+msgid ""
+"Invite friends with your referral link and get %(a)s coins for each new "
+"account."
+msgstr ""
+"با لینک دعوت، دوستانتان را دعوت کنید و برای هر حساب جدید %(a)s سکه بگیرید."
+
+msgid "Compare before and after"
+msgstr "مقایسه قبل و بعد"
+
+msgid "The comparison shows one frame from the middle of the video."
+msgstr "این مقایسه یک فریم از وسط ویدیو را نشان می‌دهد."
+
+msgid "Download result"
+msgstr "دانلود نتیجه"
+
+msgid "Open preview"
+msgstr "باز کردن پیش‌نمایش"
+
+msgid "The files of this job were deleted after the storage period."
+msgstr "فایل‌های این پردازش پس از پایان مدت نگهداری حذف شده‌اند."
+
+msgid "Position in queue"
+msgstr "نوبت در صف"
+
+msgid "Time left"
+msgstr "زمان باقی‌مانده"
+
+msgid ""
+"The processing server is offline right now. Your job will start as soon as "
+"it is back."
+msgstr "سرور پردازش الان خاموش است. به محض روشن شدن، پردازش شما شروع می‌شود."
+
+msgid ""
+"You can close this page; the job keeps running and you will find it in My "
+"files."
+msgstr ""
+"می‌توانید این صفحه را ببندید؛ پردازش ادامه پیدا می‌کند و نتیجه در «فایل‌های "
+"من» خواهد بود."
+
+msgid "Cancel this job? Your coins will be returned."
+msgstr "این پردازش لغو شود؟ سکه‌های شما برگردانده می‌شود."
+
+msgid "Cancel job"
+msgstr "لغو پردازش"
+
+msgid "Processing failed"
+msgstr "پردازش ناموفق بود"
+
+msgid ""
+"Something went wrong while processing this file. Your coins were returned."
+msgstr "هنگام پردازش این فایل مشکلی پیش آمد. سکه‌های شما برگردانده شد."
+
+msgid "Try again"
+msgstr "تلاش دوباره"
+
+msgid "Cancelled"
+msgstr "لغو شده"
+
+msgid "This job was cancelled and the coins were returned."
+msgstr "این پردازش لغو شد و سکه‌ها برگردانده شد."
+
+msgid "Details"
+msgstr "جزئیات"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Length"
+msgstr "مدت"
+
+msgid "Frame rate"
+msgstr "فریم‌ریت"
+
+msgid "Original size"
+msgstr "اندازه اصلی"
+
+msgid "New size"
+msgstr "اندازه جدید"
+
+msgid "refunded"
+msgstr "برگشت داده شد"
+
+msgid "Uploaded"
+msgstr "زمان آپلود"
+
+msgid "Processing time"
+msgstr "زمان پردازش"
+
+msgid "Delete this job and its files permanently?"
+msgstr "این پردازش و فایل‌هایش برای همیشه حذف شوند؟"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "New"
+msgstr "جدید"
+
+msgid "You have not enhanced anything yet."
+msgstr "هنوز فایلی پردازش نکرده‌اید."
+
+#, python-format
+msgid "Files are kept for %(d)s days, then deleted automatically."
+msgstr "فایل‌ها %(d)s روز نگهداری و سپس خودکار حذف می‌شوند."
+
+msgid "faces"
+msgstr "چهره"
+
+msgid "smooth"
+msgstr "روان"
+
+msgid "ago"
+msgstr "پیش"
+
+msgid "Positive to add coins, negative to remove coins."
+msgstr "عدد مثبت برای افزودن و عدد منفی برای کم کردن سکه."
+
+msgid "Note"
+msgstr "توضیح"
+
+msgid "Amount cannot be zero."
+msgstr "مقدار نمی‌تواند صفر باشد."
+
+msgid "Amount is too large."
+msgstr "مقدار خیلی بزرگ است."
+
+msgid "Add / remove coins"
+msgstr "افزودن / کم کردن سکه"
+
+msgid ""
+"Example: 50 adds 50 coins, -20 removes 20 coins. Leave empty for no change."
+msgstr ""
+"مثال: 50 یعنی ۵۰ سکه اضافه شود، ‎-20 یعنی ۲۰ سکه کم شود. برای بدون تغییر "
+"خالی بگذارید."
+
+msgid "Coin change note"
+msgstr "توضیح تغییر سکه"
+
+msgid "Personal info"
+msgstr "اطلاعات شخصی"
+
+msgid "Coins"
+msgstr "سکه‌ها"
+
+msgid "Permissions"
+msgstr "دسترسی‌ها"
+
+msgid "Important dates"
+msgstr "تاریخ‌های مهم"
+
+msgid "referrals"
+msgstr "دعوت‌شده‌ها"
+
+#, python-format
+msgid "Coins updated. New balance: %(coins)s"
+msgstr "سکه‌ها به‌روز شد. موجودی جدید: %(coins)s"
+
+msgid "Add / remove coins for selected users"
+msgstr "افزودن / کم کردن سکه برای کاربران انتخاب‌شده"
+
+#, python-format
+msgid "Coins updated for %(n)d users."
+msgstr "سکه %(n)d کاربر به‌روز شد."
+
+msgid "Activate selected users"
+msgstr "فعال کردن کاربران انتخاب‌شده"
+
+msgid "Deactivate (block) selected users"
+msgstr "غیرفعال (مسدود) کردن کاربران انتخاب‌شده"
+
+msgid "Users and coins"
+msgstr "کاربران و سکه‌ها"
+
+msgid "Referral code (optional)"
+msgstr "کد دعوت (اختیاری)"
+
+msgid "An account with this email already exists."
+msgstr "حسابی با این ایمیل وجود دارد."
+
+msgid "This referral code is not valid."
+msgstr "این کد دعوت معتبر نیست."
+
+msgid "Username or email"
+msgstr "نام کاربری یا ایمیل"
+
+msgid "email address"
+msgstr "آدرس ایمیل"
+
+msgid "referral code"
+msgstr "کد دعوت"
+
+msgid "referred by"
+msgstr "دعوت‌شده توسط"
+
+msgid "user"
+msgstr "کاربر"
+
+msgid "users"
+msgstr "کاربران"
+
+msgid "Sign-up bonus"
+msgstr "هدیه ثبت‌نام"
+
+msgid "Referral bonus"
+msgstr "هدیه دعوت"
+
+msgid "Added by admin"
+msgstr "افزوده توسط مدیر"
+
+msgid "Removed by admin"
+msgstr "کسر توسط مدیر"
+
+msgid "Enhancement"
+msgstr "افزایش کیفیت"
+
+msgid "Refund"
+msgstr "بازگشت سکه"
+
+msgid "amount"
+msgstr "مقدار"
+
+msgid "balance after"
+msgstr "موجودی پس از تراکنش"
+
+msgid "type"
+msgstr "نوع"
+
+msgid "note"
+msgstr "توضیح"
+
+msgid "job"
+msgstr "پردازش"
+
+msgid "by"
+msgstr "توسط"
+
+msgid "date"
+msgstr "تاریخ"
+
+msgid "coin transaction"
+msgstr "تراکنش سکه"
+
+msgid "coin transactions"
+msgstr "تراکنش‌های سکه"
+
+msgid "Too many failed attempts. Please try again in 15 minutes."
+msgstr "تلاش‌های ناموفق زیادی انجام شد. لطفاً ۱۵ دقیقه دیگر دوباره تلاش کنید."
+
+msgid ""
+"Too many accounts were created from your network. Please try again later."
+msgstr "حساب‌های زیادی از شبکه شما ساخته شده است. لطفاً بعداً تلاش کنید."
+
+msgid "Welcome! Your account was created."
+msgstr "خوش آمدید! حساب شما ساخته شد."
+
+msgid "Your password was changed."
+msgstr "رمز عبور شما تغییر کرد."
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Bonuses"
+msgstr "هدیه‌ها"
+
+msgid "Image prices (coins per image)"
+msgstr "قیمت عکس (سکه برای هر عکس)"
+
+msgid "Video prices (coins per started 10 seconds)"
+msgstr "قیمت ویدیو (سکه برای هر ۱۰ ثانیه یا کمتر)"
+
+msgid "Limits"
+msgstr "محدودیت‌ها"
+
+msgid "status"
+msgstr "وضعیت"
+
+msgid "progress"
+msgstr "پیشرفت"
+
+msgid "input"
+msgstr "ورودی"
+
+msgid "result"
+msgstr "نتیجه"
+
+msgid "Cancel and refund selected jobs"
+msgstr "لغو و بازگرداندن سکه پردازش‌های انتخاب‌شده"
+
+msgid "Cancelled by admin"
+msgstr "لغو توسط مدیر"
+
+#, python-format
+msgid "%(n)d jobs cancelled and refunded."
+msgstr "%(n)d پردازش لغو و سکه آن برگردانده شد."
+
+msgid "Retry selected failed jobs (the user is charged again)"
+msgstr "تلاش دوباره پردازش‌های ناموفق انتخاب‌شده (سکه دوباره کسر می‌شود)"
+
+#, python-format
+msgid "%(n)d jobs requeued, %(s)d skipped (not enough coins)."
+msgstr "%(n)d پردازش به صف برگشت، %(s)d مورد رد شد (سکه کافی نبود)."
+
+msgid "Delete files of selected jobs"
+msgstr "حذف فایل‌های پردازش‌های انتخاب‌شده"
+
+#, python-format
+msgid "Files of %(n)d jobs deleted."
+msgstr "فایل‌های %(n)d پردازش حذف شد."
+
+msgid "online"
+msgstr "روشن"
+
+msgid "Image or video"
+msgstr "عکس یا ویدیو"
+
+msgid "Smooth motion (double FPS, video only)"
+msgstr "حرکت روان (دو برابر فریم، فقط ویدیو)"
+
+msgid "This file type is not supported."
+msgstr "این نوع فایل پشتیبانی نمی‌شود."
+
+#, python-format
+msgid "The file is too large. Maximum: %(mb)s MB"
+msgstr "حجم فایل زیاد است. حداکثر: %(mb)s مگابایت"
+
+msgid "registration open"
+msgstr "ثبت‌نام باز است"
+
+msgid "pause new jobs"
+msgstr "توقف پردازش‌های جدید"
+
+msgid "Users cannot submit new jobs while this is on."
+msgstr ""
+"تا زمانی که این گزینه روشن است، کاربران نمی‌توانند پردازش جدید ثبت کنند."
+
+msgid "announcement (Persian)"
+msgstr "اطلاعیه (فارسی)"
+
+msgid "announcement (English)"
+msgstr "اطلاعیه (انگلیسی)"
+
+msgid "sign-up bonus coins"
+msgstr "سکه هدیه ثبت‌نام"
+
+msgid "referral bonus for the inviter"
+msgstr "هدیه دعوت برای دعوت‌کننده"
+
+msgid "referral bonus for the new user"
+msgstr "هدیه دعوت برای کاربر جدید"
+
+msgid "image - fast mode"
+msgstr "عکس - حالت سریع"
+
+msgid "image - high quality mode"
+msgstr "عکس - حالت کیفیت بالا"
+
+msgid "image - extra for 4x"
+msgstr "عکس - هزینه اضافه ۴ برابر"
+
+msgid "image - face restoration extra"
+msgstr "عکس - هزینه اضافه بازسازی چهره"
+
+msgid "video - fast mode (per 10 s)"
+msgstr "ویدیو - حالت سریع (هر ۱۰ ثانیه)"
+
+msgid "video - high quality mode (per 10 s)"
+msgstr "ویدیو - حالت کیفیت بالا (هر ۱۰ ثانیه)"
+
+msgid "video - extra for 4x (per 10 s)"
+msgstr "ویدیو - هزینه اضافه ۴ برابر (هر ۱۰ ثانیه)"
+
+msgid "video - face restoration extra (per 10 s)"
+msgstr "ویدیو - هزینه اضافه بازسازی چهره (هر ۱۰ ثانیه)"
+
+msgid "video - smooth motion extra (per 10 s)"
+msgstr "ویدیو - هزینه اضافه حرکت روان (هر ۱۰ ثانیه)"
+
+msgid "max image size (MB)"
+msgstr "حداکثر حجم عکس (مگابایت)"
+
+msgid "max image resolution (megapixels)"
+msgstr "حداکثر وضوح عکس (مگاپیکسل)"
+
+msgid "max video size (MB)"
+msgstr "حداکثر حجم ویدیو (مگابایت)"
+
+msgid "max video length (seconds)"
+msgstr "حداکثر طول ویدیو (ثانیه)"
+
+msgid "max output side for images (px)"
+msgstr "حداکثر ضلع خروجی عکس (پیکسل)"
+
+msgid "max output side for videos (px)"
+msgstr "حداکثر ضلع خروجی ویدیو (پیکسل)"
+
+msgid "max queued jobs per user"
+msgstr "حداکثر پردازش همزمان هر کاربر"
+
+msgid "delete files after (days)"
+msgstr "حذف فایل‌ها بعد از (روز)"
+
+msgid "0 keeps files forever."
+msgstr "عدد ۰ یعنی فایل‌ها همیشه نگه داشته شوند."
+
+msgid "site settings"
+msgstr "تنظیمات سایت"
+
+msgid "Site settings"
+msgstr "تنظیمات سایت"
+
+msgid "last seen"
+msgstr "آخرین فعالیت"
+
+msgid "device"
+msgstr "دستگاه"
+
+msgid "current job"
+msgstr "پردازش فعلی"
+
+msgid "worker status"
+msgstr "وضعیت سرور پردازش"
+
+msgid "Image"
+msgstr "عکس"
+
+msgid "Video"
+msgstr "ویدیو"
+
+msgid "In queue"
+msgstr "در صف"
+
+msgid "Processing"
+msgstr "در حال پردازش"
+
+msgid "Done"
+msgstr "انجام شد"
+
+msgid "Failed"
+msgstr "ناموفق"
+
+msgid "mode"
+msgstr "حالت"
+
+msgid "scale"
+msgstr "بزرگ‌نمایی"
+
+msgid "face restoration"
+msgstr "بازسازی چهره"
+
+msgid "smooth motion (2x FPS)"
+msgstr "حرکت روان (۲ برابر فریم)"
+
+msgid "stage"
+msgstr "مرحله"
+
+msgid "cost (coins)"
+msgstr "هزینه (سکه)"
+
+msgid "error"
+msgstr "خطا"
+
+msgid "file name"
+msgstr "نام فایل"
+
+msgid "output"
+msgstr "خروجی"
+
+msgid "files deleted"
+msgstr "فایل‌ها حذف شده"
+
+msgid "input width"
+msgstr "عرض ورودی"
+
+msgid "input height"
+msgstr "ارتفاع ورودی"
+
+msgid "output width"
+msgstr "عرض خروجی"
+
+msgid "output height"
+msgstr "ارتفاع خروجی"
+
+msgid "duration (s)"
+msgstr "مدت (ثانیه)"
+
+msgid "frame rate (FPS)"
+msgstr "فریم‌ریت (FPS)"
+
+msgid "created"
+msgstr "ایجاد"
+
+msgid "started"
+msgstr "شروع"
+
+msgid "finished"
+msgstr "پایان"
+
+msgid "jobs"
+msgstr "پردازش‌ها"
+
+msgid "Waiting in queue"
+msgstr "در انتظار نوبت"
+
+msgid "Loading AI models"
+msgstr "در حال آماده‌سازی مدل‌های هوش مصنوعی"
+
+msgid "Enhancing details"
+msgstr "در حال بهبود جزئیات"
+
+msgid "Restoring faces"
+msgstr "در حال بازسازی چهره‌ها"
+
+msgid "Generating extra frames"
+msgstr "در حال ساخت فریم‌های اضافه"
+
+msgid "Saving the result"
+msgstr "در حال ذخیره نتیجه"
+
+msgid "Finished"
+msgstr "تمام شد"
+
+#, python-format
+msgid "(%s × 10 seconds)"
+msgstr "(%s × ۱۰ ثانیه)"
+
+msgid "You do not have enough coins for this job."
+msgstr "سکه کافی برای این پردازش ندارید."
+
+#, python-format
+msgid "Uploading... %s%"
+msgstr "در حال آپلود... %s٪"
+
+msgid "Upload finished, starting..."
+msgstr "آپلود تمام شد، در حال شروع..."
+
+msgid "Upload failed. Please try again."
+msgstr "آپلود ناموفق بود. لطفاً دوباره تلاش کنید."
+
+msgid "Please choose a file first."
+msgstr "لطفاً ابتدا یک فایل انتخاب کنید."
+
+msgid "seconds"
+msgstr "ثانیه"
+
+#, python-format
+msgid "You already have %(n)d jobs in progress. Wait for them to finish."
+msgstr "شما %(n)d پردازش در جریان دارید. صبر کنید تا تمام شوند."
+
+msgid ""
+"The file could not be read. It may be damaged or in an unsupported format."
+msgstr "فایل قابل خواندن نیست. ممکن است خراب باشد یا فرمت آن پشتیبانی نشود."
+
+msgid "The image is too small."
+msgstr "تصویر خیلی کوچک است."
+
+#, python-format
+msgid "The image resolution is too high. Maximum: %(mp)s megapixels"
+msgstr "وضوح تصویر خیلی زیاد است. حداکثر: %(mp)s مگاپیکسل"
+
+#, python-format
+msgid "The video is too long. Maximum: %(s)s seconds"
+msgstr "ویدیو خیلی طولانی است. حداکثر: %(s)s ثانیه"
+
+#, python-format
+msgid "Not enough coins. This job costs %(cost)d coins and you have %(have)d."
+msgstr ""
+"سکه کافی ندارید. هزینه این پردازش %(cost)d سکه است و شما %(have)d سکه دارید."
+
+msgid "The job was cancelled and your coins were returned."
+msgstr "پردازش لغو شد و سکه‌های شما برگردانده شد."
+
+msgid "Cancel the job before deleting it."
+msgstr "قبل از حذف، پردازش را لغو کنید."
+
+msgid "The job and its files were deleted."
+msgstr "پردازش و فایل‌هایش حذف شدند."

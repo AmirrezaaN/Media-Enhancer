@@ -1,0 +1,18 @@
+{% load i18n %}<a class="card job-card" href="{% url 'enhancer:job_detail' job.pk %}">
+  <div class="job-thumb">
+    {% if job.status == "done" and job.output_preview and not job.files_deleted %}
+      <img src="{% url 'enhancer:job_file' job.pk 'after' %}" alt="" loading="lazy">
+    {% else %}
+      <span class="job-thumb-icon">{% if job.is_image %}🖼{% else %}🎬{% endif %}</span>
+    {% endif %}
+    <span class="badge badge-{{ job.status }}">{{ job.get_status_display }}</span>
+  </div>
+  <div class="job-card-body">
+    <b class="ellipsis" title="{{ job.original_name }}">{{ job.original_name }}</b>
+    <span class="muted small">
+      {{ job.get_media_type_display }} · {{ job.get_quality_display }} · {{ job.scale }}x{% if job.face_enhance %} · {% trans "faces" %}{% endif %}{% if job.fps_boost %} · {% trans "smooth" %}{% endif %}
+    </span>
+    <span class="muted small">{{ job.created_at|timesince }} {% trans "ago" %} · {{ job.cost }} {% trans "coins" %}</span>
+    {% if job.is_active %}<div class="bar bar-sm"><span data-width="{{ job.progress|floatformat:0 }}"></span></div>{% endif %}
+  </div>
+</a>

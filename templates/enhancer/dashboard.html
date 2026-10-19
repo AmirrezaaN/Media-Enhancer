@@ -1,0 +1,88 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Enhance" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Enhance a photo or video" %}</h1>
+  <a class="coins-big" href="{% url 'accounts:wallet' %}">{% blocktrans with n=user.coins %}Balance: <b>{{ n }}</b> coins{% endblocktrans %}</a>
+</div>
+
+{% if not worker_online %}
+  <div class="alert alert-warning">{% trans "The processing server is offline right now. You can still upload; your job will start as soon as it is back." %}</div>
+{% endif %}
+{% if site.maintenance_mode %}
+  <div class="alert alert-warning">{% trans "New jobs are paused right now. Please try again later." %}</div>
+{% endif %}
+
+<form id="job-form" class="card upload-card" method="post" action="{% url 'enhancer:create_job' %}" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  <label class="dropzone" for="file-input" data-dropzone>
+    {{ form.file }}
+    <div class="dropzone-empty" data-dz-empty>
+      <div class="dz-icon">⇪</div>
+      <b>{% trans "Drop a file here or click to choose" %}</b>
+      <span class="muted small">
+        {% blocktrans with img=site.max_image_mb vid=site.max_video_mb sec=site.max_video_seconds %}Images: JPG, PNG, WEBP up to {{ img }} MB · Videos: MP4, MOV, MKV, WEBM up to {{ vid }} MB and {{ sec }} seconds{% endblocktrans %}
+      </span>
+    </div>
+    <div class="dropzone-file" data-dz-file hidden>
+      <div class="dz-preview" data-dz-preview></div>
+      <div>
+        <b data-dz-name></b>
+        <div class="muted small" data-dz-meta></div>
+        <span class="link small">{% trans "Choose another file" %}</span>
+      </div>
+    </div>
+  </label>
+
+  <div class="options">
+    <fieldset class="option-group">
+      <legend>{% trans "Mode" %}</legend>
+      <label class="choice"><input type="radio" name="quality" value="fast"{% if form.quality.value == "fast" %} checked{% endif %}>
+        <span><b>{% trans "Fast" %}</b><small>{% trans "Quick result, good for most videos" %}</small></span></label>
+      <label class="choice"><input type="radio" name="quality" value="high"{% if form.quality.value != "fast" %} checked{% endif %}>
+        <span><b>{% trans "High quality" %}</b><small>{% trans "Slower, the best detail" %}</small></span></label>
+    </fieldset>
+    <fieldset class="option-group">
+      <legend>{% trans "Upscale" %}</legend>
+      <label class="choice"><input type="radio" name="scale" value="2"{% if form.scale.value|stringformat:"s" == "2" %} checked{% endif %}>
+        <span><b>2x</b><small>{% trans "Double the resolution" %}</small></span></label>
+      <label class="choice"><input type="radio" name="scale" value="4"{% if form.scale.value|stringformat:"s" != "2" %} checked{% endif %}>
+        <span><b>4x</b><small>{% trans "Maximum resolution" %}</small></span></label>
+    </fieldset>
+    <fieldset class="option-group">
+      <legend>{% trans "Extras" %}</legend>
+      <label class="toggle"><input type="checkbox" name="face_enhance"{% if form.face_enhance.value %} checked{% endif %}>
+        <span><b>{% trans "Restore faces" %}</b><small>{% trans "Sharper eyes, skin and hair" %}</small></span></label>
+      <label class="toggle" data-video-only><input type="checkbox" name="fps_boost"{% if form.fps_boost.value %} checked{% endif %}>
+        <span><b>{% trans "Smooth motion" %}</b><small>{% trans "Double the frame rate (video only)" %}</small></span></label>
+    </fieldset>
+  </div>
+
+  <div class="submit-row">
+    <div class="cost" data-cost>
+      <span class="muted">{% trans "Cost" %}:</span>
+      <b data-cost-value>—</b> <span>{% trans "coins" %}</span>
+      <span class="muted small" data-cost-note></span>
+    </div>
+    <button type="submit" class="btn btn-lg" data-submit{% if site.maintenance_mode %} disabled{% endif %}>{% trans "Enhance now" %}</button>
+  </div>
+  <div class="upload-progress" data-upload-progress hidden>
+    <div class="bar"><span data-upload-bar></span></div>
+    <span class="small muted" data-upload-text>{% trans "Uploading..." %}</span>
+  </div>
+  <div class="alert alert-error" data-form-error hidden></div>
+</form>
+
+{{ prices|json_script:"prices" }}
+{{ js_text|json_script:"i18n-dashboard" }}
+
+{% if recent_jobs %}
+  <div class="section-head">
+    <h2>{% trans "Recent files" %}</h2>
+    <a href="{% url 'enhancer:job_list' %}">{% trans "See all" %}</a>
+  </div>
+  <div class="grid grid-3">
+    {% for job in recent_jobs %}{% include "enhancer/_job_card.html" %}{% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

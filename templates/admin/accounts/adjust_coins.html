@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}{% load i18n admin_urls %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+  <a href="{% url 'admin:accounts_user_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo; {{ title }}
+</div>
+{% endblock %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <p>{% trans "Selected users" %}: {% for u in users %}<b>{{ u.username }}</b> ({{ u.coins }}){% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  <fieldset class="module aligned">{% for field in form %}
+    <div class="form-row">{{ field.errors }}{{ field.label_tag }} {{ field }}{% if field.help_text %}<div class="help">{{ field.help_text }}</div>{% endif %}</div>
+  {% endfor %}</fieldset>
+  {% for pk in selected %}<input type="hidden" name="_selected_action" value="{{ pk }}">{% endfor %}
+  <input type="hidden" name="action" value="{{ action }}">
+  <input type="hidden" name="apply" value="1">
+  <div class="submit-row"><input type="submit" class="default" value="{% trans 'Apply' %}"></div>
+</form>
+{% endblock %}

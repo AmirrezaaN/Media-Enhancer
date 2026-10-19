@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Sign up" %}{% endblock %}
+{% block content %}
+<div class="auth-card card center">
+  <h1>{% trans "Registration is closed" %}</h1>
+  <p class="muted">{% trans "New accounts cannot be created right now. Please try again later." %}</p>
+  <a class="btn" href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+</div>
+{% endblock %}

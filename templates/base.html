@@ -1,0 +1,72 @@
+{% load i18n static %}{% get_current_language as LANG %}{% get_current_language_bidi as RTL %}<!doctype html>
+<html lang="{{ LANG }}" dir="{% if RTL %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% trans "AI photo & video enhancer" %}{% endblock %} · {% trans "Media Enhancer" %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/svg+xml">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="{% url 'enhancer:home' %}">
+        <img src="{% static 'img/logo.svg' %}" alt="" width="30" height="30">
+        <span>{% trans "Media Enhancer" %}</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="{% trans 'Menu' %}" data-nav-toggle>☰</button>
+      <nav class="nav" data-nav>
+        {% if user.is_authenticated %}
+          <a href="{% url 'enhancer:dashboard' %}">{% trans "Enhance" %}</a>
+          <a href="{% url 'enhancer:job_list' %}">{% trans "My files" %}</a>
+          <a class="coins-pill" href="{% url 'accounts:wallet' %}" title="{% trans 'Your coins' %}">
+            <span class="coin-icon" aria-hidden="true">●</span> <b>{{ user.coins }}</b> {% trans "coins" %}
+          </a>
+          {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% trans "Admin panel" %}</a>{% endif %}
+          <form method="post" action="{% url 'accounts:logout' %}" class="inline">{% csrf_token %}
+            <button type="submit" class="linklike">{% trans "Log out" %}</button>
+          </form>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+          <a class="btn btn-sm" href="{% url 'accounts:register' %}">{% trans "Sign up" %}</a>
+        {% endif %}
+        <form method="post" action="{% url 'set_language' %}" class="lang-switch">{% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% if LANG == "fa" %}
+            <button type="submit" name="language" value="en" title="English">EN</button>
+          {% else %}
+            <button type="submit" name="language" value="fa" title="فارسی">فا</button>
+          {% endif %}
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  {% if site_settings.announcement %}
+    <div class="announcement"><div class="container">{{ site_settings.announcement|linebreaksbr }}</div></div>
+  {% endif %}
+
+  {% if messages %}
+    <div class="container messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main class="{% block main_class %}container page{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span>© {% now "Y" %} {% trans "Media Enhancer" %}</span>
+      <span class="muted">{% trans "Powered by Real-ESRGAN, GFPGAN and RIFE" %}</span>
+    </div>
+  </footer>
+  <script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>

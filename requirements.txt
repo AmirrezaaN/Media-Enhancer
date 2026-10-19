@@ -1,0 +1,12 @@
+# PyTorch with CUDA must be installed first (see README):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+Django==5.2.*
+python-dotenv>=1.0
+Pillow>=10.0
+numpy<2.1
+opencv-python>=4.8
+spandrel==0.4.*
+facexlib==0.3.*
+polib>=1.2
+waitress>=3.0
+whitenoise>=6.6

@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% trans "Log in" %}{% endblock %}
+{% block content %}
+<div class="auth-card card">
+  <h1>{% trans "Log in" %}</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
+    {% for field in form %}{% include "accounts/_field.html" %}{% endfor %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-lg btn-block" type="submit">{% trans "Log in" %}</button>
+  </form>
+  <p class="center muted">{% trans "No account yet?" %} <a href="{% url 'accounts:register' %}">{% trans "Sign up" %}</a></p>
+</div>
+{% endblock %}

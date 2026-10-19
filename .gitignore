@@ -1,0 +1,17 @@
+# python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# local config / data
+.env
+db.sqlite3*
+storage/
+staticfiles/
+weights/
+
+# editors
+.vscode/
+.idea/
+.claude/

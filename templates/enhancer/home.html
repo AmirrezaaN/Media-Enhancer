@@ -1,0 +1,94 @@
+{% extends "base.html" %}{% load i18n static %}
+{% block main_class %}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">{% trans "AI powered · Photos & videos" %}</span>
+      <h1>{% trans "Make blurry photos and low-quality videos sharp again" %}</h1>
+      <p class="lead">{% trans "Upload an image or a video. Our AI models upscale it up to 4x, remove noise and blur, restore faces and can even make videos smoother." %}</p>
+      <div class="hero-actions">
+        {% if user.is_authenticated %}
+          <a class="btn btn-lg" href="{% url 'enhancer:dashboard' %}">{% trans "Start enhancing" %}</a>
+        {% else %}
+          <a class="btn btn-lg" href="{% url 'accounts:register' %}">{% trans "Sign up free" %}</a>
+          <a class="btn btn-lg btn-ghost" href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+        {% endif %}
+      </div>
+      {% if site.signup_bonus %}
+        <p class="muted small">{% blocktrans with n=site.signup_bonus %}New accounts get {{ n }} free coins.{% endblocktrans %}</p>
+      {% endif %}
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="demo">
+        <div class="demo-before"></div>
+        <div class="demo-after"></div>
+        <span class="demo-label demo-label-before">{% trans "Before" %}</span>
+        <span class="demo-label demo-label-after">{% trans "After" %}</span>
+        <div class="demo-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="section-title">{% trans "What it does" %}</h2>
+  <div class="grid grid-4">
+    <div class="card feature">
+      <div class="feature-icon">⤢</div>
+      <h3>{% trans "Upscale up to 4x" %}</h3>
+      <p>{% trans "Real-ESRGAN rebuilds fine detail so small pictures can be printed or shown on large screens." %}</p>
+    </div>
+    <div class="card feature">
+      <div class="feature-icon">☺</div>
+      <h3>{% trans "Face restoration" %}</h3>
+      <p>{% trans "GFPGAN recovers eyes, skin and hair in blurry or old photos." %}</p>
+    </div>
+    <div class="card feature">
+      <div class="feature-icon">▶</div>
+      <h3>{% trans "Video enhancement" %}</h3>
+      <p>{% trans "Every frame is enhanced and the sound is kept. Get up to 4K output." %}</p>
+    </div>
+    <div class="card feature">
+      <div class="feature-icon">≋</div>
+      <h3>{% trans "Smooth motion" %}</h3>
+      <p>{% trans "RIFE creates new in-between frames to double the frame rate, for example 30 to 60 FPS." %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="section-title">{% trans "How it works" %}</h2>
+  <ol class="steps">
+    <li><b>{% trans "Upload" %}</b><span>{% trans "Choose a photo or a video." %}</span></li>
+    <li><b>{% trans "Choose" %}</b><span>{% trans "Fast or high quality, 2x or 4x, faces and smooth motion." %}</span></li>
+    <li><b>{% trans "Download" %}</b><span>{% trans "Compare before and after, then download the result." %}</span></li>
+  </ol>
+</section>
+
+<section class="container section">
+  <h2 class="section-title">{% trans "Prices" %}</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>{% trans "Images" %} <small class="muted">({% trans "coins per image" %})</small></h3>
+      <table class="table">
+        <tr><td>{% trans "Fast mode" %}</td><td class="num">{{ site.image_fast_cost }}</td></tr>
+        <tr><td>{% trans "High quality mode" %}</td><td class="num">{{ site.image_high_cost }}</td></tr>
+        <tr><td>{% trans "4x instead of 2x" %}</td><td class="num">+{{ site.image_4x_extra }}</td></tr>
+        <tr><td>{% trans "Face restoration" %}</td><td class="num">+{{ site.image_face_cost }}</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>{% trans "Videos" %} <small class="muted">({% trans "coins per 10 seconds" %})</small></h3>
+      <table class="table">
+        <tr><td>{% trans "Fast mode" %}</td><td class="num">{{ site.video_fast_cost }}</td></tr>
+        <tr><td>{% trans "High quality mode" %}</td><td class="num">{{ site.video_high_cost }}</td></tr>
+        <tr><td>{% trans "4x instead of 2x" %}</td><td class="num">+{{ site.video_4x_extra }}</td></tr>
+        <tr><td>{% trans "Face restoration" %}</td><td class="num">+{{ site.video_face_cost }}</td></tr>
+        <tr><td>{% trans "Smooth motion (2x FPS)" %}</td><td class="num">+{{ site.video_fps_cost }}</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="muted small center">{% blocktrans with a=site.referral_bonus_referrer %}Invite friends with your referral link and get {{ a }} coins for each new account.{% endblocktrans %}</p>
+</section>
+{% endblock %}
