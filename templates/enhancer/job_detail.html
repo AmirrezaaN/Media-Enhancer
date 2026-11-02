@@ -38,7 +38,7 @@
         <h2 data-stage>{{ status.stage|default:status.status_display }}</h2>
         <div class="bar bar-lg"><span data-progress-bar data-width="{{ status.progress|unlocalize }}"></span></div>
         <div class="progress-meta">
-          <b data-progress-text>{{ status.progress }}%</b>
+          <b data-progress-text>{{ status.progress|fanum }}{% if LANGUAGE_CODE == 'fa' %}٪{% else %}%{% endif %}</b>
           <span class="muted" data-queue{% if not status.queue_position %} hidden{% endif %}>{% trans "Position in queue" %}: <b data-queue-pos>{{ status.queue_position }}</b></span>
           <span class="muted" data-eta hidden>{% trans "Time left" %}: <b data-eta-value></b></span>
         </div>
@@ -70,18 +70,18 @@
     <dl>
       <dt>{% trans "Type" %}</dt><dd>{{ job.get_media_type_display }}</dd>
       <dt>{% trans "Mode" %}</dt><dd>{{ job.get_quality_display }}</dd>
-      <dt>{% trans "Upscale" %}</dt><dd>{{ job.scale }}x</dd>
+      <dt>{% trans "Upscale" %}</dt><dd>{{ job.scale|times }}</dd>
       <dt>{% trans "Restore faces" %}</dt><dd>{% if job.face_enhance %}✓{% else %}—{% endif %}</dd>
       {% if not job.is_image %}
         <dt>{% trans "Smooth motion" %}</dt><dd>{% if job.fps_boost %}✓{% else %}—{% endif %}</dd>
-        <dt>{% trans "Length" %}</dt><dd>{{ job.duration|duration }}</dd>
-        <dt>{% trans "Frame rate" %}</dt><dd class="ltr">{{ job.fps|floatformat:2 }}{% if job.fps_boost %} → {% widthratio job.fps 1 2 %}{% endif %} FPS</dd>
+        <dt>{% trans "Length" %}</dt><dd>{{ job.duration|duration|fanum }}</dd>
+        <dt>{% trans "Frame rate" %}</dt><dd class="ltr">{{ job.fps|floatformat:2|fanum }}{% if job.fps_boost %} → {% widthratio job.fps 1 2 as fps2 %}{{ fps2|fanum }}{% endif %} FPS</dd>
       {% endif %}
-      <dt>{% trans "Original size" %}</dt><dd class="ltr">{{ job.input_width }} × {{ job.input_height }}</dd>
-      {% if job.output_width %}<dt>{% trans "New size" %}</dt><dd class="ltr">{{ job.output_width }} × {{ job.output_height }}</dd>{% endif %}
-      <dt>{% trans "Cost" %}</dt><dd>{{ job.cost }} {% trans "coins" %}{% if job.refunded %} ({% trans "refunded" %}){% endif %}</dd>
-      <dt>{% trans "Uploaded" %}</dt><dd>{{ job.created_at|date:"Y-m-d H:i" }}</dd>
-      {% if job.processing_seconds is not None %}<dt>{% trans "Processing time" %}</dt><dd>{{ job.processing_seconds|duration }}</dd>{% endif %}
+      <dt>{% trans "Original size" %}</dt><dd class="ltr">{{ job.input_width|fanum }} × {{ job.input_height|fanum }}</dd>
+      {% if job.output_width %}<dt>{% trans "New size" %}</dt><dd class="ltr">{{ job.output_width|fanum }} × {{ job.output_height|fanum }}</dd>{% endif %}
+      <dt>{% trans "Cost" %}</dt><dd>{{ job.cost|fanum }} {% trans "coins" %}{% if job.refunded %} ({% trans "refunded" %}){% endif %}</dd>
+      <dt>{% trans "Uploaded" %}</dt><dd>{{ job.created_at|date:"Y-m-d H:i"|fanum }}</dd>
+      {% if job.processing_seconds is not None %}<dt>{% trans "Processing time" %}</dt><dd>{{ job.processing_seconds|duration|fanum }}</dd>{% endif %}
     </dl>
     {% if not job.is_active %}
       <form method="post" action="{% url 'enhancer:job_delete' job.pk %}" data-confirm="{% trans 'Delete this job and its files permanently?' %}">

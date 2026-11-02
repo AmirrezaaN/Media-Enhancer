@@ -1,10 +1,10 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n enhancer_tags %}
 {% block title %}{% trans "Sign up" %}{% endblock %}
 {% block content %}
 <div class="auth-card card">
   <h1>{% trans "Create an account" %}</h1>
   {% if site.signup_bonus %}
-    <p class="gift">🎁 {% blocktrans with n=site.signup_bonus %}You get {{ n }} free coins after signing up.{% endblocktrans %}</p>
+    <p class="gift">🎁 {% blocktrans with n=site.signup_bonus|fanum %}You get {{ n }} free coins after signing up.{% endblocktrans %}</p>
   {% endif %}
   <form method="post" novalidate>
     {% csrf_token %}

@@ -16,3 +16,7 @@ weights/
 .idea/
 .claude/
 Media Enhancer/
+
+# build output
+dist/
+build/

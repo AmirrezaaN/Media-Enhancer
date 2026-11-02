@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n static %}
+{% extends "base.html" %}{% load i18n static enhancer_tags %}
 {% block main_class %}{% endblock %}
 {% block content %}
 <section class="hero">
@@ -16,7 +16,7 @@
         {% endif %}
       </div>
       {% if site.signup_bonus %}
-        <p class="muted small">{% blocktrans with n=site.signup_bonus %}New accounts get {{ n }} free coins.{% endblocktrans %}</p>
+        <p class="muted small">{% blocktrans with n=site.signup_bonus|fanum %}New accounts get {{ n }} free coins.{% endblocktrans %}</p>
       {% endif %}
     </div>
     <div class="hero-visual" aria-hidden="true">
@@ -89,6 +89,12 @@
       </table>
     </div>
   </div>
-  <p class="muted small center">{% blocktrans with a=site.referral_bonus_referrer %}Invite friends with your referral link and get {{ a }} coins for each new account.{% endblocktrans %}</p>
+  <p class="muted small center">{% blocktrans with a=site.referral_bonus_referrer|fanum %}Invite friends with your referral link and get {{ a }} coins for each new account.{% endblocktrans %}</p>
 </section>
+
+{% if site.app_enabled and site.app_download_url %}
+<section class="container section">
+  {% include "enhancer/_app_banner.html" %}
+</section>
+{% endif %}
 {% endblock %}

@@ -36,12 +36,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts",
     "enhancer",
+    "appapi",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "enhancer.middleware.DefaultLanguageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -98,9 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = "fa"
-LANGUAGES = [("fa", "فارسی"), ("en", "English")]
+LANGUAGE_CODE = "en"
+LANGUAGES = [("en", "English"), ("fa", "فارسی")]
 LOCALE_PATHS = [BASE_DIR / "locale"]
+LANGUAGE_COOKIE_AGE = 365 * 24 * 3600
 TIME_ZONE = "Asia/Tehran"
 USE_I18N = True
 USE_TZ = True
@@ -147,7 +150,11 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 # AI processing
 AI_DEVICE = os.getenv("AI_DEVICE", "cuda")
-AI_TILE_SIZE = int(os.getenv("AI_TILE_SIZE", "400"))
+AI_TILE_SIZE = int(os.getenv("AI_TILE_SIZE", "512"))
+# auto = half precision with automatic repair of corrupt tiles; fp32 = always full precision
+AI_PRECISION = os.getenv("AI_PRECISION", "auto")
+# auto = NVIDIA hardware encoder when available, otherwise libx264; or force "nvenc" / "libx264"
+VIDEO_ENCODER = os.getenv("VIDEO_ENCODER", "auto")
 AI_WEIGHTS_DIR = BASE_DIR / "weights"
 FFMPEG_BIN = os.getenv("FFMPEG_BIN", "ffmpeg")
 FFPROBE_BIN = os.getenv("FFPROBE_BIN", "ffprobe")

@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n enhancer_tags %}
 {% block title %}{% trans "Wallet" %}{% endblock %}
 {% block content %}
 <div class="page-head">
@@ -9,7 +9,7 @@
 <div class="grid grid-2">
   <div class="card balance-card">
     <span class="muted">{% trans "Your balance" %}</span>
-    <div class="balance"><span class="coin-icon">●</span> {{ user.coins }} <small>{% trans "coins" %}</small></div>
+    <div class="balance"><span class="coin-icon">●</span> {{ user.coins|fanum }} <small>{% trans "coins" %}</small></div>
     <p class="muted small">{% trans "To get more coins, contact the site administrator." %}</p>
     <dl class="compact">
       <dt>{% trans "Username" %}</dt><dd>{{ user.username }}</dd>
@@ -18,7 +18,7 @@
   </div>
   <div class="card">
     <h3>🎁 {% trans "Invite friends" %}</h3>
-    <p>{% blocktrans with a=site.referral_bonus_referrer b=site.referral_bonus_new_user %}Share your link. When a friend signs up with it, you get {{ a }} coins and they get {{ b }} extra coins.{% endblocktrans %}</p>
+    <p>{% blocktrans with a=site.referral_bonus_referrer|fanum b=site.referral_bonus_new_user|fanum %}Share your link. When a friend signs up with it, you get {{ a }} coins and they get {{ b }} extra coins.{% endblocktrans %}</p>
     <div class="copy-row">
       <input type="text" readonly value="{{ referral_link }}" class="ltr" data-copy-source>
       <button class="btn" type="button" data-copy data-copied-text="{% trans 'Copied!' %}">{% trans "Copy" %}</button>
@@ -35,13 +35,13 @@
     <tbody>
     {% for tx in page.object_list %}
       <tr>
-        <td class="nowrap">{{ tx.created_at|date:"Y-m-d H:i" }}</td>
+        <td class="nowrap">{{ tx.created_at|date:"Y-m-d H:i"|fanum }}</td>
         <td>
           {{ tx.get_kind_display }}
           {% if tx.job_id %}<a class="muted small" href="{% url 'enhancer:job_detail' tx.job_id %}">{{ tx.note }}</a>{% elif tx.note and tx.kind == "admin_grant" or tx.note and tx.kind == "admin_deduct" %}<span class="muted small">— {{ tx.note }}</span>{% endif %}
         </td>
-        <td class="num {% if tx.amount > 0 %}pos{% else %}neg{% endif %}">{% if tx.amount > 0 %}+{% endif %}{{ tx.amount }}</td>
-        <td class="num">{{ tx.balance_after }}</td>
+        <td class="num {% if tx.amount > 0 %}pos{% else %}neg{% endif %}">{% if tx.amount > 0 %}+{% endif %}{{ tx.amount|fanum }}</td>
+        <td class="num">{{ tx.balance_after|fanum }}</td>
       </tr>
     {% endfor %}
     </tbody>

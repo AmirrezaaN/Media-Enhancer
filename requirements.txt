@@ -1,5 +1,7 @@
 # PyTorch with CUDA must be installed first (see README):
 #   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+
+# website + worker
 Django==5.2.*
 python-dotenv>=1.0
 Pillow>=10.0
@@ -7,6 +9,11 @@ numpy<2.1
 opencv-python>=4.8
 spandrel==0.4.*
 facexlib==0.3.*
+ccvfi==0.0.*
 polib>=1.2
 waitress>=3.0
 whitenoise>=6.6
+
+# Windows app (only needed to run or build desktop/)
+PySide6==6.8.*
+pyinstaller==6.*

@@ -1,6 +1,9 @@
 import io
 import shutil
 import tempfile
+from types import SimpleNamespace
+
+import torch
 
 from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -11,7 +14,10 @@ from PIL import Image
 from accounts import wallet
 from accounts.models import CoinTransaction, User
 
-from .engine.pipeline import make_plan
+from mecore.core import Engine, Upscaler
+from mecore.media import MediaInfo
+from mecore.pipeline import make_plan, source_color_matrix
+
 from .models import Job, SiteSettings
 from .views import refund_job
 
@@ -52,6 +58,45 @@ class PlanTests(TestCase):
 
     def test_fast_mode_model(self):
         self.assertEqual(make_plan(640, 360, 2, "fast", 3840).model, "realesr-general-x4v3")
+
+
+class EngineLogicTests(TestCase):
+    """Engine rules that do not need a GPU."""
+
+    def _guard(self, x, y, scale=2):
+        fake = SimpleNamespace(scale=scale, GUARD_THRESHOLD=Upscaler.GUARD_THRESHOLD,
+                               GUARD_MIN_PIXELS=Upscaler.GUARD_MIN_PIXELS)
+        return Upscaler._corrupt(fake, x, y)
+
+    def test_guard_accepts_a_faithful_upscale(self):
+        x = torch.rand(1, 3, 64, 64)
+        y = torch.nn.functional.interpolate(x, scale_factor=2, mode="nearest")
+        self.assertFalse(self._guard(x, y))
+
+    def test_guard_catches_garbage_block_and_nan(self):
+        x = torch.full((1, 3, 64, 64), 0.6)
+        y = torch.nn.functional.interpolate(x, scale_factor=2, mode="nearest")
+        y[:, :, 40:46, 40:46] = 0.0  # a small black dot
+        self.assertTrue(self._guard(x, y))
+        y2 = torch.nn.functional.interpolate(x, scale_factor=2, mode="nearest")
+        y2[0, 0, 5, 5] = float("nan")
+        self.assertTrue(self._guard(x, y2))
+
+    def test_precision_policy(self):
+        def engine(precision):
+            return SimpleNamespace(cuda=True, config=SimpleNamespace(precision=precision))
+
+        self.assertTrue(Engine.uses_half(engine("auto"), "RealESRGAN_x4plus"))
+        self.assertTrue(Engine.uses_half(engine("fp16"), "realesr-general-x4v3"))
+        self.assertFalse(Engine.uses_half(engine("fp32"), "RealESRGAN_x4plus"))
+        self.assertFalse(Engine.uses_half(SimpleNamespace(cuda=False, config=SimpleNamespace(precision="auto")), "x"))
+
+    def test_color_matrix(self):
+        self.assertEqual(source_color_matrix(MediaInfo(1920, 1080, color_space="bt709")), "bt709")
+        self.assertEqual(source_color_matrix(MediaInfo(640, 480, color_space="smpte170m")), "bt601")
+        # Untagged files follow the player convention: HD = BT.709, SD = BT.601.
+        self.assertEqual(source_color_matrix(MediaInfo(1280, 720)), "bt709")
+        self.assertEqual(source_color_matrix(MediaInfo(480, 834)), "bt601")
 
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA)

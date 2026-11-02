@@ -1,9 +1,9 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n enhancer_tags %}
 {% block title %}{% trans "Enhance" %}{% endblock %}
 {% block content %}
 <div class="page-head">
   <h1>{% trans "Enhance a photo or video" %}</h1>
-  <a class="coins-big" href="{% url 'accounts:wallet' %}">{% blocktrans with n=user.coins %}Balance: <b>{{ n }}</b> coins{% endblocktrans %}</a>
+  <a class="coins-big" href="{% url 'accounts:wallet' %}">{% blocktrans with n=user.coins|fanum %}Balance: <b>{{ n }}</b> coins{% endblocktrans %}</a>
 </div>
 
 {% if not worker_online %}
@@ -21,7 +21,7 @@
       <div class="dz-icon">⇪</div>
       <b>{% trans "Drop a file here or click to choose" %}</b>
       <span class="muted small">
-        {% blocktrans with img=site.max_image_mb vid=site.max_video_mb sec=site.max_video_seconds %}Images: JPG, PNG, WEBP up to {{ img }} MB · Videos: MP4, MOV, MKV, WEBM up to {{ vid }} MB and {{ sec }} seconds{% endblocktrans %}
+        {% blocktrans with img=site.max_image_mb|fanum vid=site.max_video_mb|fanum sec=site.max_video_seconds|fanum %}Images: JPG, PNG, WEBP up to {{ img }} MB · Videos: MP4, MOV, MKV, WEBM up to {{ vid }} MB and {{ sec }} seconds{% endblocktrans %}
       </span>
     </div>
     <div class="dropzone-file" data-dz-file hidden>
@@ -45,9 +45,9 @@
     <fieldset class="option-group">
       <legend>{% trans "Upscale" %}</legend>
       <label class="choice"><input type="radio" name="scale" value="2"{% if form.scale.value|stringformat:"s" == "2" %} checked{% endif %}>
-        <span><b>2x</b><small>{% trans "Double the resolution" %}</small></span></label>
+        <span><b>{{ 2|times }}</b><small>{% trans "Double the resolution" %}</small></span></label>
       <label class="choice"><input type="radio" name="scale" value="4"{% if form.scale.value|stringformat:"s" != "2" %} checked{% endif %}>
-        <span><b>4x</b><small>{% trans "Maximum resolution" %}</small></span></label>
+        <span><b>{{ 4|times }}</b><small>{% trans "Maximum resolution" %}</small></span></label>
     </fieldset>
     <fieldset class="option-group">
       <legend>{% trans "Extras" %}</legend>
@@ -72,6 +72,8 @@
   </div>
   <div class="alert alert-error" data-form-error hidden></div>
 </form>
+
+{% if site.app_enabled and site.app_download_url %}{% include "enhancer/_app_banner.html" %}{% endif %}
 
 {{ prices|json_script:"prices" }}
 {{ js_text|json_script:"i18n-dashboard" }}

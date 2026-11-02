@@ -3,6 +3,7 @@ from datetime import timedelta
 from django import template
 from django.db.models import Count, Q, Sum
 from django.utils import timezone
+from django.utils.translation import get_language
 
 from accounts.models import CoinTransaction, User
 from enhancer.models import Job, WorkerStatus
@@ -49,3 +50,23 @@ def duration(seconds):
 def lang_url(context):
     request = context.get("request")
     return request.get_full_path() if request else "/"
+
+
+_FA_DIGITS = str.maketrans("0123456789.", "۰۱۲۳۴۵۶۷۸۹٫")
+
+
+def _persian():
+    return (get_language() or "").startswith("fa")
+
+
+@register.filter
+def fanum(value):
+    """Numbers in Persian digits on the Persian site, unchanged in English."""
+    text = str(value)
+    return text.translate(_FA_DIGITS) if _persian() else text
+
+
+@register.filter
+def times(value):
+    """Upscale factor: "4x" in English, "۴ برابر" in Persian."""
+    return f"{fanum(value)} برابر" if _persian() else f"{value}x"

@@ -1,4 +1,4 @@
-{% load i18n static %}{% get_current_language as LANG %}{% get_current_language_bidi as RTL %}<!doctype html>
+{% load i18n static enhancer_tags %}{% get_current_language as LANG %}{% get_current_language_bidi as RTL %}<!doctype html>
 <html lang="{{ LANG }}" dir="{% if RTL %}rtl{% else %}ltr{% endif %}">
 <head>
   <meta charset="utf-8">
@@ -23,7 +23,7 @@
           <a href="{% url 'enhancer:dashboard' %}">{% trans "Enhance" %}</a>
           <a href="{% url 'enhancer:job_list' %}">{% trans "My files" %}</a>
           <a class="coins-pill" href="{% url 'accounts:wallet' %}" title="{% trans 'Your coins' %}">
-            <span class="coin-icon" aria-hidden="true">●</span> <b>{{ user.coins }}</b> {% trans "coins" %}
+            <span class="coin-icon" aria-hidden="true">●</span> <b>{{ user.coins|fanum }}</b> {% trans "coins" %}
           </a>
           {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% trans "Admin panel" %}</a>{% endif %}
           <form method="post" action="{% url 'accounts:logout' %}" class="inline">{% csrf_token %}
@@ -36,9 +36,9 @@
         <form method="post" action="{% url 'set_language' %}" class="lang-switch">{% csrf_token %}
           <input type="hidden" name="next" value="{{ request.get_full_path }}">
           {% if LANG == "fa" %}
-            <button type="submit" name="language" value="en" title="English">EN</button>
+            <button type="submit" name="language" value="en">English</button>
           {% else %}
-            <button type="submit" name="language" value="fa" title="فارسی">فا</button>
+            <button type="submit" name="language" value="fa">فارسی</button>
           {% endif %}
         </form>
       </nav>

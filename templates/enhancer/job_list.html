@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n enhancer_tags %}
 {% block title %}{% trans "My files" %}{% endblock %}
 {% block content %}
 <div class="page-head">
@@ -11,7 +11,7 @@
   </div>
   {% include "_pagination.html" %}
   {% if site_settings.retention_days %}
-    <p class="muted small center">{% blocktrans with d=site_settings.retention_days %}Files are kept for {{ d }} days, then deleted automatically.{% endblocktrans %}</p>
+    <p class="muted small center">{% blocktrans with d=site_settings.retention_days|fanum %}Files are kept for {{ d }} days, then deleted automatically.{% endblocktrans %}</p>
   {% endif %}
 {% else %}
   <div class="card empty">

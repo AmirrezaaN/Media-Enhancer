@@ -1,0 +1,13 @@
+{% load i18n enhancer_tags %}<div class="card app-banner">
+  <div>
+    <h3>🖥 {% trans "Windows app" %}</h3>
+    <p class="muted">
+      {% if site.app_price_percent == 0 %}
+        {% trans "Run the enhancement on your own NVIDIA graphics card with the same account. In the app it is free." %}
+      {% else %}
+        {% blocktrans with p=site.app_price_percent|fanum %}Run the enhancement on your own NVIDIA graphics card with the same account and pay only {{ p }} percent of the website price.{% endblocktrans %}
+      {% endif %}
+    </p>
+  </div>
+  <a class="btn" href="{{ site.app_download_url }}" rel="noopener">⬇ {% trans "Download for Windows" %}</a>
+</div>

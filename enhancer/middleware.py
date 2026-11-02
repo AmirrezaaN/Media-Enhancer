@@ -12,6 +12,22 @@ CSP = (
 )
 
 
+class DefaultLanguageMiddleware:
+    """Show the site in the default language (LANGUAGE_CODE, English) until the visitor picks another
+    one with the language button, instead of guessing from the browser's language.
+    The desktop-app API keeps the Accept-Language header so the app gets messages in its own language.
+    Must run before LocaleMiddleware.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if not request.path.startswith("/api/"):
+            request.META.pop("HTTP_ACCEPT_LANGUAGE", None)
+        return self.get_response(request)
+
+
 class ContentSecurityPolicyMiddleware:
     """Strict CSP for the public site. The Django admin keeps its own defaults."""
 

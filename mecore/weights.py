@@ -1,4 +1,4 @@
-"""Registry of AI model weights and a downloader. Weights come from the official project releases."""
+"""AI model weights and a downloader. Weights come from the official project releases."""
 
 import logging
 import shutil
@@ -6,9 +6,7 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
-from django.conf import settings
-
-logger = logging.getLogger("enhancer")
+logger = logging.getLogger("mecore")
 
 MODELS = {
     # Fast general-purpose 4x model (Real-ESRGAN compact). Good for video.
@@ -21,26 +19,21 @@ MODELS = {
 }
 
 
-def weights_dir() -> Path:
-    path = Path(settings.AI_WEIGHTS_DIR)
-    path.mkdir(parents=True, exist_ok=True)
-    return path
+def model_path(weights_dir: Path, name: str) -> Path:
+    return Path(weights_dir) / f"{name}.pth"
 
 
-def model_path(name: str) -> Path:
-    return weights_dir() / f"{name}.pth"
-
-
-def ensure(name: str) -> Path:
+def ensure(weights_dir: Path, name: str) -> Path:
     """Return the local path of a model, downloading it the first time."""
-    path = model_path(name)
+    weights_dir = Path(weights_dir)
+    weights_dir.mkdir(parents=True, exist_ok=True)
+    path = model_path(weights_dir, name)
     if path.exists() and path.stat().st_size > 0:
         return path
-    url = MODELS[name]
     logger.info("Downloading %s ...", name)
-    with tempfile.NamedTemporaryFile(dir=weights_dir(), suffix=".part", delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(dir=weights_dir, suffix=".part", delete=False) as tmp:
         tmp_path = Path(tmp.name)
-        with urllib.request.urlopen(url, timeout=60) as response:
+        with urllib.request.urlopen(MODELS[name], timeout=60) as response:
             shutil.copyfileobj(response, tmp, length=1024 * 1024)
     tmp_path.replace(path)
     logger.info("Saved %s (%.1f MB)", path.name, path.stat().st_size / 1e6)

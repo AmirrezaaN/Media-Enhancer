@@ -46,6 +46,8 @@ class CoinTransaction(models.Model):
         ADMIN_DEDUCT = "admin_deduct", _("Removed by admin")
         JOB_CHARGE = "job_charge", _("Enhancement")
         JOB_REFUND = "job_refund", _("Refund")
+        APP_CHARGE = "app_charge", _("Enhancement (desktop app)")
+        APP_REFUND = "app_refund", _("Refund (desktop app)")
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_("user"), on_delete=models.CASCADE, related_name="transactions"

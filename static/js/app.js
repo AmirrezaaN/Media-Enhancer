@@ -7,6 +7,10 @@
     const el = document.getElementById(id);
     return el ? JSON.parse(el.textContent) : null;
   };
+  // Persian pages show Persian digits; English pages are left alone.
+  const FA = document.documentElement.lang === "fa";
+  const n = (v) => (FA ? String(v).replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]).replace(".", "٫") : String(v));
+  const pct = (v) => n(v) + (FA ? "٪" : "%");
   const IMAGE_EXT = ["jpg", "jpeg", "png", "webp", "bmp", "tif", "tiff"];
   const VIDEO_EXT = ["mp4", "mov", "mkv", "webm", "avi", "m4v"];
 
@@ -54,7 +58,7 @@
     let previewUrl = null;
 
     const ext = (name) => (name.split(".").pop() || "").toLowerCase();
-    const formatSize = (b) => (b > 1048576 ? (b / 1048576).toFixed(1) + " MB" : Math.ceil(b / 1024) + " KB");
+    const formatSize = (b) => (b > 1048576 ? n((b / 1048576).toFixed(1)) + " MB" : n(Math.ceil(b / 1024)) + " KB");
 
     function showError(msg) {
       errorBox.textContent = msg;
@@ -78,9 +82,9 @@
       } else {
         const units = Math.max(1, Math.ceil(duration / 10));
         cost = ((high ? p.high : p.fast) + (x4 ? p.x4 : 0) + (face ? p.face : 0) + (fps ? p.fps : 0)) * units;
-        costNote.textContent = duration ? text.perUnits.replace("%s", units) : "";
+        costNote.textContent = duration ? text.perUnits.replace("%s", n(units)) : "";
       }
-      costValue.textContent = cost;
+      costValue.textContent = n(cost);
       const tooExpensive = cost > prices.coins;
       costBox.classList.toggle("insufficient", tooExpensive);
       showError(tooExpensive ? text.notEnough : "");
@@ -101,7 +105,7 @@
       previewUrl = URL.createObjectURL(file);
       if (mediaType === "image") {
         const img = new Image();
-        img.onload = () => { meta.textContent = formatSize(file.size) + " · " + img.naturalWidth + "×" + img.naturalHeight; };
+        img.onload = () => { meta.textContent = formatSize(file.size) + " · " + n(img.naturalWidth) + "×" + n(img.naturalHeight); };
         img.src = previewUrl;
         box.appendChild(img);
       } else if (mediaType === "video") {
@@ -110,7 +114,7 @@
         v.preload = "metadata";
         v.onloadedmetadata = () => {
           duration = v.duration || 0;
-          meta.textContent = formatSize(file.size) + " · " + v.videoWidth + "×" + v.videoHeight + " · " + Math.round(duration) + " " + text.seconds;
+          meta.textContent = formatSize(file.size) + " · " + n(v.videoWidth) + "×" + n(v.videoHeight) + " · " + n(Math.round(duration)) + " " + text.seconds;
           updateCost();
         };
         v.src = previewUrl;
@@ -148,9 +152,9 @@
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
       xhr.upload.addEventListener("progress", (ev) => {
         if (!ev.lengthComputable) return;
-        const pct = Math.round((ev.loaded / ev.total) * 100);
-        bar.style.width = pct + "%";
-        label.textContent = pct < 100 ? text.uploading.replace("%s", pct) : text.processing;
+        const done = Math.round((ev.loaded / ev.total) * 100);
+        bar.style.width = done + "%";
+        label.textContent = done < 100 ? text.uploading.replace("%s%", pct(done)).replace("%s", n(done)) : text.processing;
       });
       xhr.onload = () => {
         let data = null;
@@ -171,7 +175,7 @@
     const url = statusBox.dataset.jobStatusUrl;
     const formatTime = (s) => {
       const m = Math.floor(s / 60), sec = s % 60, h = Math.floor(m / 60);
-      return h ? h + ":" + String(m % 60).padStart(2, "0") + ":" + String(sec).padStart(2, "0") : m + ":" + String(sec).padStart(2, "0");
+      return n(h ? h + ":" + String(m % 60).padStart(2, "0") + ":" + String(sec).padStart(2, "0") : m + ":" + String(sec).padStart(2, "0"));
     };
     const poll = async () => {
       try {
@@ -180,13 +184,13 @@
         const s = await res.json();
         if (s.finished) { window.location.reload(); return; }
         $("[data-progress-bar]").style.width = s.progress + "%";
-        $("[data-progress-text]").textContent = s.progress + "%";
+        $("[data-progress-text]").textContent = pct(s.progress);
         $("[data-stage]").textContent = s.stage || s.status_display;
         $("[data-status-badge]").textContent = s.status_display;
         $("[data-status-badge]").className = "badge badge-lg badge-" + s.status;
         const q = $("[data-queue]");
         q.hidden = !s.queue_position;
-        $("[data-queue-pos]").textContent = s.queue_position;
+        $("[data-queue-pos]").textContent = n(s.queue_position);
         const eta = $("[data-eta]");
         eta.hidden = s.eta_seconds == null;
         if (s.eta_seconds != null) $("[data-eta-value]").textContent = formatTime(s.eta_seconds);

@@ -28,6 +28,8 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             _("Video prices (coins per started 10 seconds)"),
             {"fields": ("video_fast_cost", "video_high_cost", "video_4x_extra", "video_face_cost", "video_fps_cost")},
         ),
+        (_("Quality"), {"fields": ("video_denoise",)}),
+        (_("Desktop app"), {"fields": ("app_enabled", "app_price_percent", "app_download_url")}),
         (
             _("Limits"),
             {

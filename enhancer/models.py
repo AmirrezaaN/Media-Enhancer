@@ -60,6 +60,28 @@ class SiteSettings(models.Model):
         _("delete files after (days)"), default=7, help_text=_("0 keeps files forever.")
     )
 
+    # Quality
+    video_denoise = models.PositiveSmallIntegerField(
+        _("video noise reduction"),
+        default=1,
+        choices=[(0, _("Off")), (1, _("Light")), (2, _("Medium")), (3, _("Strong"))],
+        help_text=_("Cleans compression noise and stops flicker between frames. Light is right for most videos."),
+    )
+
+    # Desktop app
+    app_enabled = models.BooleanField(_("desktop app can log in"), default=True)
+    app_price_percent = models.PositiveIntegerField(
+        _("desktop app price (% of site price)"),
+        default=50,
+        validators=[MaxValueValidator(1000)],
+        help_text=_("The desktop app uses the customer's own GPU, so it can be cheaper. 0 makes it free."),
+    )
+    app_download_url = models.URLField(
+        _("desktop app download link"),
+        blank=True,
+        help_text=_("Where users can download the Windows installer. Leave empty to hide the download button."),
+    )
+
     class Meta:
         verbose_name = _("site settings")
         verbose_name_plural = _("site settings")
@@ -103,6 +125,11 @@ class SiteSettings(models.Model):
         if fps_boost:
             per_unit += self.video_fps_cost
         return per_unit * units
+
+    def app_price(self, media_type, quality, scale, face, fps_boost, duration=0.0):
+        """Price of the same job in the desktop app, rounded up to whole coins."""
+        base = self.price(media_type, quality, scale, face, fps_boost, duration)
+        return math.ceil(base * self.app_price_percent / 100)
 
     def price_table(self):
         """Prices exposed to the browser for the live cost preview."""

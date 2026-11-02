@@ -17,9 +17,9 @@ class Command(BaseCommand):
         parser.add_argument("--once", action="store_true", help="Process the current queue and exit.")
 
     def handle(self, *args, poll, once, **options):
-        from enhancer.engine.core import Engine
+        from enhancer.ai import create_engine
 
-        engine = Engine()
+        engine = create_engine()
         self.stdout.write(self.style.SUCCESS(f"Worker started on {engine.device_name}. Press Ctrl+C to stop."))
         requeue_interrupted_jobs()
         cleanup_old_files()

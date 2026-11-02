@@ -976,3 +976,130 @@ msgstr "قبل از حذف، پردازش را لغو کنید."
 
 msgid "The job and its files were deleted."
 msgstr "پردازش و فایل‌هایش حذف شدند."
+
+msgid "Windows app"
+msgstr "برنامه ویندوز"
+
+msgid ""
+"Run the enhancement on your own NVIDIA graphics card with the same account. "
+"In the app it is free."
+msgstr ""
+"پردازش را با همین حساب روی کارت گرافیک NVIDIA خودتان انجام دهید. استفاده از "
+"برنامه رایگان است."
+
+msgid "Download for Windows"
+msgstr "دانلود برای ویندوز"
+
+#, python-format
+msgid ""
+"Run the enhancement on your own NVIDIA graphics card with the same account "
+"and pay only %(p)s percent of the website price."
+msgstr ""
+"پردازش را با همین حساب روی کارت گرافیک NVIDIA خودتان انجام دهید و فقط %(p)s "
+"درصد قیمت سایت را بپردازید."
+
+msgid "Enhancement (desktop app)"
+msgstr "افزایش کیفیت (برنامه ویندوز)"
+
+msgid "Refund (desktop app)"
+msgstr "بازگشت سکه (برنامه ویندوز)"
+
+msgid "Refund selected jobs"
+msgstr "بازگرداندن سکه پردازش‌های انتخاب‌شده"
+
+#, python-format
+msgid "%(n)d jobs refunded."
+msgstr "سکه %(n)d پردازش برگردانده شد."
+
+msgid "Desktop app"
+msgstr "برنامه ویندوز"
+
+msgid "last used"
+msgstr "آخرین استفاده"
+
+msgid "app login"
+msgstr "ورود برنامه"
+
+msgid "app logins"
+msgstr "ورودهای برنامه"
+
+msgid "Running"
+msgstr "در حال اجرا"
+
+msgid "GPU"
+msgstr "کارت گرافیک"
+
+msgid "app version"
+msgstr "نسخه برنامه"
+
+msgid "processing time (s)"
+msgstr "زمان پردازش (ثانیه)"
+
+msgid "desktop app job"
+msgstr "پردازش برنامه ویندوز"
+
+msgid "desktop app jobs"
+msgstr "پردازش‌های برنامه ویندوز"
+
+msgid "Your session has expired. Please log in again."
+msgstr "نشست شما منقضی شده است. لطفاً دوباره وارد شوید."
+
+msgid "The desktop app is disabled right now. Please use the website."
+msgstr "برنامه ویندوز فعلاً غیرفعال است. لطفاً از سایت استفاده کنید."
+
+msgid "Wrong username or password."
+msgstr "نام کاربری یا رمز عبور اشتباه است."
+
+msgid "Invalid request."
+msgstr "درخواست نامعتبر است."
+
+msgid "Job not found."
+msgstr "پردازش پیدا نشد."
+
+msgid "Quality"
+msgstr "کیفیت"
+
+msgid "video noise reduction"
+msgstr "کاهش نویز ویدیو"
+
+msgid "Off"
+msgstr "خاموش"
+
+msgid "Light"
+msgstr "ملایم"
+
+msgid "Medium"
+msgstr "متوسط"
+
+msgid "Strong"
+msgstr "قوی"
+
+msgid ""
+"Cleans compression noise and stops flicker between frames. Light is right "
+"for most videos."
+msgstr ""
+"نویز فشرده‌سازی را پاک می‌کند و لرزش بین فریم‌ها را از بین می‌برد. «ملایم» "
+"برای بیشتر ویدیوها مناسب است."
+
+msgid "desktop app can log in"
+msgstr "ورود با برنامه ویندوز مجاز است"
+
+msgid "desktop app price (% of site price)"
+msgstr "قیمت برنامه ویندوز (درصد از قیمت سایت)"
+
+msgid ""
+"The desktop app uses the customer's own GPU, so it can be cheaper. 0 makes "
+"it free."
+msgstr ""
+"برنامه ویندوز از کارت گرافیک خود کاربر استفاده می‌کند، پس می‌تواند ارزان‌تر "
+"باشد. عدد ۰ یعنی رایگان."
+
+msgid "desktop app download link"
+msgstr "لینک دانلود برنامه ویندوز"
+
+msgid ""
+"Where users can download the Windows installer. Leave empty to hide the "
+"download button."
+msgstr ""
+"آدرسی که کاربران فایل نصب ویندوز را از آن دانلود می‌کنند. برای پنهان کردن "
+"دکمه دانلود خالی بگذارید."

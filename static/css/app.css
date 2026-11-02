@@ -235,6 +235,11 @@ h1 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .bar-sm { height: 5px; margin-top: 6px; }
 .bar-lg { height: 14px; width: 100%; }
 
+/* Desktop app banner */
+.app-banner { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 18px; }
+.app-banner h3 { margin-bottom: 4px; }
+.app-banner p { margin: 0; }
+
 /* Job cards */
 .job-card { padding: 0; overflow: hidden; color: var(--text); display: flex; flex-direction: column; transition: transform .15s; }
 .job-card:hover { text-decoration: none; transform: translateY(-2px); }

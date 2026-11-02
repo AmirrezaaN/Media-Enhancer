@@ -3,7 +3,9 @@
 import logging
 import time
 from datetime import timedelta
+from pathlib import Path
 
+from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 
@@ -23,7 +25,7 @@ class ProgressReporter:
         self.last_beat = 0.0
 
     def __call__(self, percent, stage=None, force=False):
-        from .engine.pipeline import Cancelled
+        from mecore import Cancelled
 
         now = time.monotonic()
         if not force and now - self.last_write < 1.0:
@@ -61,19 +63,36 @@ def requeue_interrupted_jobs():
 
 
 def run_job(job, engine):
-    from .engine.pipeline import Cancelled, process_image, process_video
+    from mecore import Cancelled, Options, process_image, process_video, save_previews
 
     site = SiteSettings.get()
     report = ProgressReporter(job, engine.device_name)
     WorkerStatus.beat(engine.device_name, job.pk)
     logger.info("Processing job %s (%s, %s, %dx, face=%s, fps=%s)",
                 job.pk, job.media_type, job.quality, job.scale, job.face_enhance, job.fps_boost)
+    opts = Options(
+        quality=job.quality,
+        scale=job.scale,
+        face=job.face_enhance,
+        fps_boost=job.fps_boost and not job.is_image,
+        max_side=site.max_image_output_side if job.is_image else site.max_video_output_side,
+        denoise=site.video_denoise,
+    )
+    media_root = Path(settings.MEDIA_ROOT)
+    result_stem = f"results/{job.user_id}/{job.id}"
     started = time.monotonic()
     try:
         if job.is_image:
-            process_image(job, engine, report, site.max_image_output_side)
+            result = process_image(engine, job.input_file.path, media_root / result_stem, opts, report)
         else:
-            process_video(job, engine, report, site.max_video_output_side)
+            result = process_video(engine, job.input_file.path, media_root / f"{result_stem}.mp4", opts, report)
+        job.output_file = result.output_path.relative_to(media_root).as_posix()
+        job.input_preview = f"previews/{job.user_id}/{job.id}_before.jpg"
+        job.output_preview = f"previews/{job.user_id}/{job.id}_after.jpg"
+        save_previews(result, media_root / job.input_preview.name, media_root / job.output_preview.name)
+        job.output_width, job.output_height = result.width, result.height
+        if result.repaired_tiles:
+            logger.warning("Job %s: %d corrupt GPU tiles were detected and repaired", job.pk, result.repaired_tiles)
     except Cancelled:
         logger.info("Job %s was cancelled", job.pk)
         _remove_outputs(job)
